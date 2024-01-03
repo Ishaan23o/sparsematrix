@@ -11,7 +11,7 @@ app.use(express.urlencoded({ extended: false, limit: "50mb" }))
 // app.use(express.static(path.join(__dirname, 'frontend.html')))
 
 
-const { doesServe, getMerchants, getPincodes } = require('./controllers/some');
+const { doesServe, getMerchants, getPincodes, createMerchant, updatePincodes, deleteMerchant, createPincode, checkMerchant } = require('./controllers/some');
 
 // Start the server after initialization, if not initiliased, please see init.js
 
@@ -21,7 +21,16 @@ app.post("/checkEntries", doesServe)
 app.post("/getMerchantsByPincode", getMerchants)
 //Retrieve pincodes serviced by  a merchant
 app.post("/getPincodesForMerchant", getPincodes)
-
+//Check if a merchant with this name exists
+app.post("/checkMerchant", checkMerchant);
+//Add a new Pincode
+app.post("/createPincode", createPincode)
+//Create a new Merchant
+app.post("/createMerchant", createMerchant)
+//Update a merchant's servicable pincodes
+app.patch("/updatePincodes", updatePincodes)
+//Delete a merchant from the system
+app.delete("/deleteMerchant", deleteMerchant)
 
 //Start up the server
 app.listen(8000, () => {
